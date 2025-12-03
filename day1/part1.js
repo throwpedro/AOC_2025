@@ -11,7 +11,7 @@ const run = () => {
 }
 
 const readFile = () => {
-    const fileData = fs.readFileSync('input.txt');
+    const fileData = fs.readFileSync('./day1/input.txt');
     return fileData.toString().split('\n');
 }
 
