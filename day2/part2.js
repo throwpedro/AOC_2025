@@ -26,14 +26,16 @@ const checkDuplicate = (first, second) => {
     let res = 0;
     for (let i = firstNumber; i <= secondNumber; i++) {
         let asStr = i.toString();
-        // TODO: left right pointer.
-        // if numbers match move both pointers.
-        // if not, move right pointer.
-        // stop then OB
-        // let half = asStr.length / 2;
-        // if (asStr.substring(0, half) === asStr.substring(half)) {
-        //     res += i;
-        // }
+        let match = false;
+        for (let j = 1; j < asStr.length; j++) {
+            let testStr = asStr.slice(0, j);
+            let repeats = asStr.length / testStr.length;
+            match = testStr.repeat(Math.floor(repeats)) === asStr;
+            if (match) {
+                res += i;
+                break;
+            }
+        }
     }
     return res;
 }
