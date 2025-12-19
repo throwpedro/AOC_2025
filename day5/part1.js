@@ -27,9 +27,7 @@ const buildValidRanges = (rangeStrings) => {
         const [first, last] = string.split('-');
         const firstNum = Number(first);
         const lastNum = Number(last);
-        for (let i = firstNum; i <= lastNum; i++) {
-            allValidIds.push(i);
-        }
+        allValidIds.push({ first: firstNum, last: lastNum });
     });
     return allValidIds;
 }
@@ -40,11 +38,14 @@ const run = () => {
     const validIds = Array.from(new Set(buildValidRanges(validIdRanges)));
     let res = 0;
     for (let i = 0; i < ids.length; i++) {
-        if (validIds.includes(ids[i])) {
-            res++;
+        let cur = ids[i];
+        for (let j = 0; j < validIds.length; j++) {
+            if (cur >= validIds[j].first && cur <= validIds[j].last) {
+                res++;
+                break;
+            }
         }
     }
-    console.log(res);
 };
 
 run();
